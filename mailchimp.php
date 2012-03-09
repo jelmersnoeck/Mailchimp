@@ -89,18 +89,7 @@ class MailChimp
 	private function buildQueryString(array $parameters)
 	{
 		// the querystring
-		$queryString = '';
-
-		// loop the parameters
-		foreach($parameters as $parameter => $value)
-		{
-			// build the temporary string
-			if(is_array($value)) $tmpString = $this->buildQueryString($value);
-			else $tmpString = '&' . $parameter . '=' . utf8_decode($value);
-
-			// add it to the querystring
-			$queryString.= $tmpString;
-		}
+		$queryString = http_build_query($parameters);
 
 		// return
 		return $queryString;
